@@ -9,8 +9,8 @@ type AddFavoriteProduct struct {
 }
 
 type AddFavoriteProductInput struct {
-	clientId  string
-	productId string
+	ClientId  string `json:"clientId"`
+	ProductId string `json:"productId"`
 }
 
 func NewAddFavoriteProduct(clientRepository repository.ClientRepository, productRepository repository.ProductRepository, favoritesRepository repository.FavoritesRepository) *AddFavoriteProduct {
@@ -22,7 +22,7 @@ func NewAddFavoriteProduct(clientRepository repository.ClientRepository, product
 }
 
 func (a *AddFavoriteProduct) Execute(input AddFavoriteProductInput) error {
-	client, err := a.clientRepository.FindById(input.clientId)
+	client, err := a.clientRepository.FindById(input.ClientId)
 
 	if err != nil {
 		return err
@@ -32,7 +32,7 @@ func (a *AddFavoriteProduct) Execute(input AddFavoriteProductInput) error {
 		return ErrClientNotFound
 	}
 
-	product, err := a.productRepository.FindById(input.productId)
+	product, err := a.productRepository.FindById(input.ProductId)
 
 	if err != nil {
 		return err
@@ -42,7 +42,7 @@ func (a *AddFavoriteProduct) Execute(input AddFavoriteProductInput) error {
 		return ErrProductNotFound
 	}
 
-	isFavorite, err := a.favoritesRepository.IsFavorite(input.clientId, input.productId)
+	isFavorite, err := a.favoritesRepository.IsFavorite(input.ClientId, input.ProductId)
 
 	if err != nil {
 		return err
@@ -52,7 +52,7 @@ func (a *AddFavoriteProduct) Execute(input AddFavoriteProductInput) error {
 		return ErrProductIsAlreadyClientFavorite
 	}
 
-	err = a.favoritesRepository.AddFavorite(input.clientId, input.productId)
+	err = a.favoritesRepository.AddFavorite(input.ClientId, product)
 
 	if err != nil {
 		return err

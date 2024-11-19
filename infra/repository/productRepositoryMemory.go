@@ -1,7 +1,6 @@
 package repository
 
 import (
-	"errors"
 	"luizalabs-chalenge/domain/entity"
 )
 
@@ -10,17 +9,38 @@ type ProductRepositoryMemory struct {
 }
 
 func NewProductRepositoryMemory() *ProductRepositoryMemory {
-	return &ProductRepositoryMemory{
-		products: make(map[string]*entity.Product),
-	}
-}
+	products := make(map[string]*entity.Product)
 
-func (r *ProductRepositoryMemory) Create(product *entity.Product) (*entity.Product, error) {
-	if _, exists := r.products[product.Id]; exists {
-		return nil, errors.New("product already exists")
+	products["1"] = &entity.Product{
+		Id:          "1",
+		Brand:       "Brand 1",
+		Image:       "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
+		Title:       "Product 1",
+		ReviewScore: 4.5,
+		Price:       100,
 	}
-	r.products[product.Id] = product
-	return product, nil
+
+	products["2"] = &entity.Product{
+		Id:          "2",
+		Brand:       "Brand 2",
+		Image:       "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
+		Title:       "Product 2",
+		ReviewScore: 3.1,
+		Price:       29990,
+	}
+
+	products["3"] = &entity.Product{
+		Id:          "3",
+		Brand:       "Brand 2",
+		Image:       "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
+		Title:       "Product 3",
+		ReviewScore: 3,
+		Price:       10100,
+	}
+
+	return &ProductRepositoryMemory{
+		products: products,
+	}
 }
 
 func (r *ProductRepositoryMemory) FindById(id string) (*entity.Product, error) {
@@ -33,7 +53,7 @@ func (r *ProductRepositoryMemory) FindById(id string) (*entity.Product, error) {
 	return product, nil
 }
 
-func (r *ProductRepositoryMemory) FindAll(offset, limit uint64) ([]*entity.Product, error) {
+func (r *ProductRepositoryMemory) FindAll(offset uint64) ([]*entity.Product, error) {
 	var products []*entity.Product
 
 	for _, product := range r.products {
@@ -41,16 +61,4 @@ func (r *ProductRepositoryMemory) FindAll(offset, limit uint64) ([]*entity.Produ
 	}
 
 	return products, nil
-}
-
-func (r *ProductRepositoryMemory) Update(product *entity.Product) (*entity.Product, error) {
-	r.products[product.Id] = product
-
-	return product, nil
-}
-
-func (r *ProductRepositoryMemory) Delete(id string) error {
-	delete(r.products, id)
-
-	return nil
 }

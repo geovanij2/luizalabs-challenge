@@ -5,9 +5,6 @@ import (
 )
 
 type ProductRepository interface {
-	Create(product *entity.Product) (*entity.Product, error)
 	FindById(id string) (*entity.Product, error)
-	FindAll(offset, limit uint64) ([]*entity.Product, error)
-	Update(product *entity.Product) (*entity.Product, error)
-	Delete(id string) error
+	FindAll(offset uint64) ([]*entity.Product, error)
 }

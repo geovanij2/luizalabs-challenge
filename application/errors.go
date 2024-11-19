@@ -9,4 +9,5 @@ var (
 	ErrProductNotFound                = errors.New("product not found")
 	ErrProductIsAlreadyClientFavorite = errors.New("product is already client favorite")
 	ErrProductIsNotFavorite           = errors.New("product is not favorite")
+	ErrWrongPassword                  = errors.New("wrong password")
 )

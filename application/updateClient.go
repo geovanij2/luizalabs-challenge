@@ -26,6 +26,16 @@ func (u *UpdateClient) Execute(client *entity.Client) error {
 		return ErrClientNotFound
 	}
 
+	if client.Email == "" {
+		client.Email = existingClient.Email
+	}
+
+	if client.Name == "" {
+		client.Name = existingClient.Name
+	}
+
+	client.Password = existingClient.Password
+
 	if existingClient.Email != client.Email {
 		userWithEmail, err := u.clientRepository.FindByEmail(client.Email)
 		if err != nil {

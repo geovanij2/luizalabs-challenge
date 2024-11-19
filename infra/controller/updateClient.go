@@ -21,9 +21,16 @@ func NewUpdateClientController(updateClient *application.UpdateClient) *UpdateCl
 }
 
 func (ctrl *UpdateClientController) Handle(c *fiber.Ctx) error {
+	clientId := c.Params("clientId")
+	if clientId == "" {
+		log.Println("ClientId não fornecido nos pathParams")
+		return utils.RespondWithError(c, fiber.ErrBadRequest, fiber.ErrBadRequest.Code)
+	}
+
 	var input entity.Client
 
 	err := c.BodyParser(&input)
+	input.Id = clientId
 
 	if err != nil {
 		log.Println(err)
