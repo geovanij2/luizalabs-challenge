@@ -20,7 +20,6 @@ func NewReadClientController(readClient *application.ReadClient) *ReadClientCont
 }
 
 func (ctrl *ReadClientController) Handle(c *fiber.Ctx) error {
-	log.Println(c.Locals("clientId"))
 	var input application.ReadClientInput
 
 	err := c.ParamsParser(&input)
@@ -28,6 +27,10 @@ func (ctrl *ReadClientController) Handle(c *fiber.Ctx) error {
 	if err != nil {
 		log.Println(err)
 		return utils.RespondWithError(c, fiber.ErrBadRequest, fiber.ErrBadRequest.Code)
+	}
+
+	if !utils.IsAuthorized(c, input.ClientId) {
+		return utils.RespondWithError(c, fiber.ErrUnauthorized, fiber.ErrUnauthorized.Code)
 	}
 
 	client, err := ctrl.readClient.Execute(input)

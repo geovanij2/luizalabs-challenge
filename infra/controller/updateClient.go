@@ -37,6 +37,10 @@ func (ctrl *UpdateClientController) Handle(c *fiber.Ctx) error {
 		return utils.RespondWithError(c, fiber.ErrBadRequest, fiber.ErrBadRequest.Code)
 	}
 
+	if !utils.IsAuthorized(c, input.Id) {
+		return utils.RespondWithError(c, fiber.ErrUnauthorized, fiber.ErrUnauthorized.Code)
+	}
+
 	err = ctrl.updateClient.Execute(&input)
 
 	if err != nil && errors.Is(err, application.ErrClientNotFound) {

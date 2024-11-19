@@ -43,6 +43,10 @@ func (ctrl *ListFavoriteProductsController) Handle(c *fiber.Ctx) error {
 		Limit:    uint64(limit),
 	}
 
+	if !utils.IsAuthorized(c, listFavoriteProductsInput.ClientId) {
+		return utils.RespondWithError(c, fiber.ErrUnauthorized, fiber.ErrUnauthorized.Code)
+	}
+
 	products, err := ctrl.listFavoriteProducts.Execute(listFavoriteProductsInput)
 	if err != nil {
 		log.Println(err)

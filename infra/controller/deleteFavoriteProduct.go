@@ -28,6 +28,10 @@ func (ctrl *DeleteFavoriteProductController) Handle(c *fiber.Ctx) error {
 		return utils.RespondWithError(c, fiber.ErrBadRequest, fiber.ErrBadRequest.Code)
 	}
 
+	if !utils.IsAuthorized(c, deleteFavoriteProductInput.ClientId) {
+		return utils.RespondWithError(c, fiber.ErrUnauthorized, fiber.ErrUnauthorized.Code)
+	}
+
 	err = ctrl.deleteFavoriteProduct.Execute(deleteFavoriteProductInput)
 
 	if err != nil && (errors.Is(err, application.ErrProductNotFound) || errors.Is(err, application.ErrClientNotFound)) {
@@ -45,5 +49,5 @@ func (ctrl *DeleteFavoriteProductController) Handle(c *fiber.Ctx) error {
 		return utils.RespondWithError(c, fiber.ErrInternalServerError, 500)
 	}
 
-	return utils.RespondWithSuccess(c, nil, 200)
+	return utils.RespondWithSuccess(c, EmptyStruct{}, 200)
 }

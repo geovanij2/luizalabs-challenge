@@ -15,3 +15,7 @@ func RespondWithError(c *fiber.Ctx, err error, status int) error {
 func RespondWithSuccess(c *fiber.Ctx, data interface{}, status int) error {
 	return c.Status(status).JSON(data)
 }
+
+func IsAuthorized(c *fiber.Ctx, clientId string) bool {
+	return c.Locals("clientId") == clientId
+}

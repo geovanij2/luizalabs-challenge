@@ -28,6 +28,10 @@ func (ctrl *DeleteClientController) Handle(c *fiber.Ctx) error {
 		return utils.RespondWithError(c, ErrMissingParameter, 400)
 	}
 
+	if !utils.IsAuthorized(c, clientId) {
+		return utils.RespondWithError(c, fiber.ErrUnauthorized, fiber.ErrUnauthorized.Code)
+	}
+
 	err := ctrl.deleteClient.Execute(clientId)
 
 	if err != nil && errors.Is(err, application.ErrClientNotFound) {

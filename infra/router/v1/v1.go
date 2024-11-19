@@ -2,15 +2,20 @@ package v1
 
 import (
 	"luizalabs-chalenge/infra/cryptography"
+	"luizalabs-chalenge/infra/database"
 	"luizalabs-chalenge/infra/repository"
 
 	"github.com/gofiber/fiber/v2"
 )
 
 func SetupV1Router(app *fiber.App) error {
-	clientRepository := repository.NewClientRepositoryMemory()
+	conn, err := database.Conn.GetConn()
+	if err != nil {
+		return err
+	}
+	clientRepository := repository.NewClientRepositoryDatabase(conn)
 	productRepository := repository.NewProductRepositoryMemory()
-	favoritesRepository := repository.NewFavoritesRepositoryMemory()
+	favoritesRepository := repository.NewFavoritesRepositoryDatabase(conn)
 	bcryptAdapter := cryptography.NewBcryptAdapter()
 	jwtAdapter := cryptography.NewJwtAdapter("secret")
 

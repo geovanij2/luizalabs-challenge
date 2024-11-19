@@ -71,9 +71,9 @@ func SetupV1Clients(
 
 	v1Router.Post("/clients", clientControllers.createClientController.Handle)
 	v1Router.Get("/clients/:clientId", clientControllers.authMiddleware.Auth, clientControllers.readClientController.Handle)
-	v1Router.Put("/clients/:clientId", clientControllers.updateClientController.Handle)
-	v1Router.Delete("/clients/:clientId", clientControllers.deleteClientController.Handle)
-	v1Router.Post("/clients/:clientId/favorites", clientControllers.addFavoriteProductController.Handle)
-	v1Router.Get("/clients/:clientId/favorites", clientControllers.listFavoriteProductsController.Handle)
-	v1Router.Delete("/clients/:clientId/favorites/:productId", clientControllers.deleteFavoriteProductController.Handle)
+	v1Router.Put("/clients/:clientId", clientControllers.authMiddleware.Auth, clientControllers.updateClientController.Handle)
+	v1Router.Delete("/clients/:clientId", clientControllers.authMiddleware.Auth, clientControllers.deleteClientController.Handle)
+	v1Router.Post("/clients/:clientId/favorites", clientControllers.authMiddleware.Auth, clientControllers.addFavoriteProductController.Handle)
+	v1Router.Get("/clients/:clientId/favorites", clientControllers.authMiddleware.Auth, clientControllers.listFavoriteProductsController.Handle)
+	v1Router.Delete("/clients/:clientId/favorites/:productId", clientControllers.authMiddleware.Auth, clientControllers.deleteFavoriteProductController.Handle)
 }

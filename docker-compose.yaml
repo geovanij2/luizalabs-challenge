@@ -1,0 +1,54 @@
+version: "3.8"
+services:
+  api:
+    container_name: api
+    build:
+      context: .
+    environment:
+      - DB_HOST=psql
+      - POSTGRES_DB=luizalabs
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123
+    depends_on:
+      psql:
+        condition: service_healthy
+    ports:
+      - 8080:8080
+    networks:
+      - api-network
+  psql:
+    hostname: "psql"
+    image: postgres:latest
+    container_name: psql
+    restart: always
+    user: postgres
+    environment:
+      - POSTGRES_DB=luizalabs
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123
+    ports:
+      - "5432:5432"
+    volumes:
+      - db:/var/lib/postgresql/data
+      - ./db-init:/docker-entrypoint-initdb.d
+    networks:
+      - api-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@example.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    ports:
+      - "5050:80"
+    networks:
+      - api-network
+volumes:
+  db:
+networks:
+  api-network:

@@ -1,7 +1,6 @@
 package application
 
 import (
-	"log"
 	"luizalabs-chalenge/data/protocols/cryptography"
 	"luizalabs-chalenge/domain/repository"
 )
@@ -30,8 +29,6 @@ func NewLogin(
 }
 
 func (l *Login) Execute(input LoginInput) (string, error) {
-	log.Println(input.Email)
-	log.Println(input.Password)
 	client, err := l.clientRepository.FindByEmail(input.Email)
 
 	if err != nil {
