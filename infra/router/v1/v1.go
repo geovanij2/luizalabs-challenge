@@ -15,7 +15,7 @@ func SetupV1Router(app *fiber.App) error {
 	jwtAdapter := cryptography.NewJwtAdapter("secret")
 
 	v1Routes := app.Group("/v1")
-	SetupV1Clients(v1Routes, clientRepository, productRepository, favoritesRepository, bcryptAdapter)
+	SetupV1Clients(v1Routes, clientRepository, productRepository, favoritesRepository, bcryptAdapter, jwtAdapter)
 	SetupV1Login(v1Routes, clientRepository, jwtAdapter, bcryptAdapter)
 	return nil
 }

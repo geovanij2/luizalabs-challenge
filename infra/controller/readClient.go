@@ -20,6 +20,7 @@ func NewReadClientController(readClient *application.ReadClient) *ReadClientCont
 }
 
 func (ctrl *ReadClientController) Handle(c *fiber.Ctx) error {
+	log.Println(c.Locals("clientId"))
 	var input application.ReadClientInput
 
 	err := c.ParamsParser(&input)

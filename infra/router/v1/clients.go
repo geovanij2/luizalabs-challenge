@@ -5,6 +5,7 @@ import (
 	"luizalabs-chalenge/data/protocols/cryptography"
 	"luizalabs-chalenge/domain/repository"
 	"luizalabs-chalenge/infra/controller"
+	"luizalabs-chalenge/infra/middleware"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -17,6 +18,7 @@ type ClientControllers struct {
 	addFavoriteProductController    *controller.AddFavoriteProductController
 	listFavoriteProductsController  *controller.ListFavoriteProductsController
 	deleteFavoriteProductController *controller.DeleteFavoriteProductController
+	authMiddleware                  *middleware.AuthMiddleware
 }
 
 func SetupClientControllers(
@@ -24,6 +26,7 @@ func SetupClientControllers(
 	productRepository repository.ProductRepository,
 	favoritesRepository repository.FavoritesRepository,
 	hasher cryptography.Hasher,
+	decrypter cryptography.Decrypter,
 ) *ClientControllers {
 	// usecases
 	createClient := application.NewCreateClient(clientRepository, hasher)
@@ -41,6 +44,8 @@ func SetupClientControllers(
 	addFavoriteProductController := controller.NewAddFavoriteProductController(addFavoriteProduct)
 	listFavoriteProductsController := controller.NewListFavoriteProductsController(listFavoriteProducts)
 	deleteFavoriteProductController := controller.NewDeleteFavoriteProductController(deleteFavoriteProduct)
+	// middleware
+	authMiddleware := middleware.NewAuthMiddleware(decrypter)
 
 	return &ClientControllers{
 		createClientController:          createClientController,
@@ -50,6 +55,7 @@ func SetupClientControllers(
 		addFavoriteProductController:    addFavoriteProductController,
 		listFavoriteProductsController:  listFavoriteProductsController,
 		deleteFavoriteProductController: deleteFavoriteProductController,
+		authMiddleware:                  authMiddleware,
 	}
 }
 
@@ -59,11 +65,12 @@ func SetupV1Clients(
 	productRepository repository.ProductRepository,
 	favoritesRepository repository.FavoritesRepository,
 	hasher cryptography.Hasher,
+	decrypter cryptography.Decrypter,
 ) {
-	clientControllers := SetupClientControllers(clientRepository, productRepository, favoritesRepository, hasher)
+	clientControllers := SetupClientControllers(clientRepository, productRepository, favoritesRepository, hasher, decrypter)
 
 	v1Router.Post("/clients", clientControllers.createClientController.Handle)
-	v1Router.Get("/clients/:clientId", clientControllers.readClientController.Handle)
+	v1Router.Get("/clients/:clientId", clientControllers.authMiddleware.Auth, clientControllers.readClientController.Handle)
 	v1Router.Put("/clients/:clientId", clientControllers.updateClientController.Handle)
 	v1Router.Delete("/clients/:clientId", clientControllers.deleteClientController.Handle)
 	v1Router.Post("/clients/:clientId/favorites", clientControllers.addFavoriteProductController.Handle)
