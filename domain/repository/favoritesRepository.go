@@ -1,6 +1,6 @@
 package repository
 
-import "luizalabs-chalenge/domain/entity"
+import "luizalabs-challenge/domain/entity"
 
 type FavoritesRepository interface {
 	AddFavorite(clientId string, product *entity.Product) error

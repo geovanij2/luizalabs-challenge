@@ -1,8 +1,8 @@
 package application
 
 import (
-	"luizalabs-chalenge/infra/cryptography"
-	"luizalabs-chalenge/infra/repository"
+	"luizalabs-challenge/infra/cryptography"
+	"luizalabs-challenge/infra/repository"
 	"testing"
 
 	"github.com/stretchr/testify/assert"

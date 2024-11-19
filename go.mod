@@ -1,4 +1,4 @@
-module luizalabs-chalenge
+module luizalabs-challenge
 
 go 1.23.3
 

@@ -1,8 +1,8 @@
 package middleware
 
 import (
-	"luizalabs-chalenge/data/protocols/cryptography"
-	"luizalabs-chalenge/utils"
+	"luizalabs-challenge/data/protocols/cryptography"
+	"luizalabs-challenge/utils"
 
 	"github.com/gofiber/fiber/v2"
 )

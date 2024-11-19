@@ -2,7 +2,7 @@ package database
 
 import (
 	"fmt"
-	"luizalabs-chalenge/utils"
+	"luizalabs-challenge/utils"
 
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"

@@ -1,6 +1,6 @@
 package application
 
-import "luizalabs-chalenge/domain/repository"
+import "luizalabs-challenge/domain/repository"
 
 type AddFavoriteProduct struct {
 	clientRepository    repository.ClientRepository

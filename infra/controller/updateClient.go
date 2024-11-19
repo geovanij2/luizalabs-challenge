@@ -3,9 +3,9 @@ package controller
 import (
 	"errors"
 	"log"
-	"luizalabs-chalenge/application"
-	"luizalabs-chalenge/domain/entity"
-	"luizalabs-chalenge/utils"
+	"luizalabs-challenge/application"
+	"luizalabs-challenge/domain/entity"
+	"luizalabs-challenge/utils"
 
 	"github.com/gofiber/fiber/v2"
 )

@@ -2,8 +2,8 @@ package main
 
 import (
 	"log"
-	"luizalabs-chalenge/infra/database"
-	"luizalabs-chalenge/infra/server"
+	"luizalabs-challenge/infra/database"
+	"luizalabs-challenge/infra/server"
 )
 
 func main() {

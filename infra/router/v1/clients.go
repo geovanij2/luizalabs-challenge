@@ -1,11 +1,11 @@
 package v1
 
 import (
-	"luizalabs-chalenge/application"
-	"luizalabs-chalenge/data/protocols/cryptography"
-	"luizalabs-chalenge/domain/repository"
-	"luizalabs-chalenge/infra/controller"
-	"luizalabs-chalenge/infra/middleware"
+	"luizalabs-challenge/application"
+	"luizalabs-challenge/data/protocols/cryptography"
+	"luizalabs-challenge/domain/repository"
+	"luizalabs-challenge/infra/controller"
+	"luizalabs-challenge/infra/middleware"
 
 	"github.com/gofiber/fiber/v2"
 )

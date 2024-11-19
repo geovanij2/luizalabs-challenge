@@ -1,9 +1,9 @@
 package application
 
 import (
-	"luizalabs-chalenge/data/protocols/cryptography"
-	"luizalabs-chalenge/domain/entity"
-	"luizalabs-chalenge/domain/repository"
+	"luizalabs-challenge/data/protocols/cryptography"
+	"luizalabs-challenge/domain/entity"
+	"luizalabs-challenge/domain/repository"
 )
 
 type Authentication struct {

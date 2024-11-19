@@ -2,7 +2,7 @@ package repository
 
 import (
 	"errors"
-	"luizalabs-chalenge/domain/entity"
+	"luizalabs-challenge/domain/entity"
 )
 
 type ClientRepositoryMemory struct {

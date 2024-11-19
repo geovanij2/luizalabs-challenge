@@ -2,8 +2,8 @@ package controller
 
 import (
 	"log"
-	"luizalabs-chalenge/application"
-	"luizalabs-chalenge/utils"
+	"luizalabs-challenge/application"
+	"luizalabs-challenge/utils"
 
 	"github.com/gofiber/fiber/v2"
 )

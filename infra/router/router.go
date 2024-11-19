@@ -1,7 +1,7 @@
 package router
 
 import (
-	v1 "luizalabs-chalenge/infra/router/v1"
+	v1 "luizalabs-challenge/infra/router/v1"
 
 	"github.com/gofiber/fiber/v2"
 )

@@ -1,8 +1,8 @@
 package application
 
 import (
-	"luizalabs-chalenge/domain/entity"
-	"luizalabs-chalenge/infra/repository"
+	"luizalabs-challenge/domain/entity"
+	"luizalabs-challenge/infra/repository"
 	"testing"
 
 	"github.com/stretchr/testify/assert"

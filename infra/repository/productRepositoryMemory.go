@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"luizalabs-chalenge/domain/entity"
+	"luizalabs-challenge/domain/entity"
 )
 
 type ProductRepositoryMemory struct {

@@ -1,8 +1,8 @@
 package application
 
 import (
-	"luizalabs-chalenge/domain/entity"
-	"luizalabs-chalenge/domain/repository"
+	"luizalabs-challenge/domain/entity"
+	"luizalabs-challenge/domain/repository"
 )
 
 type ReadClient struct {

@@ -1,9 +1,9 @@
 package v1
 
 import (
-	"luizalabs-chalenge/infra/cryptography"
-	"luizalabs-chalenge/infra/database"
-	"luizalabs-chalenge/infra/repository"
+	"luizalabs-challenge/infra/cryptography"
+	"luizalabs-challenge/infra/database"
+	"luizalabs-challenge/infra/repository"
 
 	"github.com/gofiber/fiber/v2"
 )

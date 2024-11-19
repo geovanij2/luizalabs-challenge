@@ -1,8 +1,8 @@
 package application
 
 import (
-	"luizalabs-chalenge/data/protocols/cryptography"
-	"luizalabs-chalenge/domain/repository"
+	"luizalabs-challenge/data/protocols/cryptography"
+	"luizalabs-challenge/domain/repository"
 )
 
 type Login struct {

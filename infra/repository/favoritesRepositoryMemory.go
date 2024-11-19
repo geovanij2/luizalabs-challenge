@@ -1,6 +1,6 @@
 package repository
 
-import "luizalabs-chalenge/domain/entity"
+import "luizalabs-challenge/domain/entity"
 
 type FavoritesRepositoryMemory struct {
 	favoriteProducts map[string][]*entity.Product
