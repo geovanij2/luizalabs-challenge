@@ -38,6 +38,42 @@ func NewProductRepositoryMemory() *ProductRepositoryMemory {
 		Price:       10100,
 	}
 
+	products["4"] = &entity.Product{
+		Id:          "4",
+		Brand:       "Brand 3",
+		Image:       "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
+		Title:       "Product 4",
+		ReviewScore: 4,
+		Price:       7634,
+	}
+
+	products["5"] = &entity.Product{
+		Id:          "5",
+		Brand:       "Brand 4",
+		Image:       "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
+		Title:       "Product 5",
+		ReviewScore: 5,
+		Price:       1234,
+	}
+
+	products["6"] = &entity.Product{
+		Id:          "6",
+		Brand:       "Brand 5",
+		Image:       "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
+		Title:       "Product 6",
+		ReviewScore: 2.5,
+		Price:       1234,
+	}
+
+	products["7"] = &entity.Product{
+		Id:          "7",
+		Brand:       "Brand 6",
+		Image:       "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
+		Title:       "Product 7",
+		ReviewScore: 3.5,
+		Price:       999,
+	}
+
 	return &ProductRepositoryMemory{
 		products: products,
 	}

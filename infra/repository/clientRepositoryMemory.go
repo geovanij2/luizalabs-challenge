@@ -8,7 +8,6 @@ import (
 type ClientRepositoryMemory struct {
 	clientsById    map[string]*entity.Client
 	clientsByEmail map[string]*entity.Client
-	clientsByToken map[string]*entity.Client
 }
 
 func (c *ClientRepositoryMemory) FindById(clientId string) (*entity.Client, error) {

@@ -38,7 +38,10 @@ func (f *FavoritesRepositoryMemory) FindFavoritesByClientId(clientId string, off
 	if _, ok := f.favoriteProducts[clientId]; !ok {
 		f.favoriteProducts[clientId] = []*entity.Product{}
 	}
-	return f.favoriteProducts[clientId], nil
+	if offset >= uint64(len(f.favoriteProducts[clientId])) {
+		return []*entity.Product{}, nil
+	}
+	return f.favoriteProducts[clientId][offset:min(offset+limit, uint64(len(f.favoriteProducts[clientId])))], nil
 }
 
 func (f *FavoritesRepositoryMemory) IsFavorite(clientId, productId string) (bool, error) {
